@@ -1,0 +1,18 @@
+site_name: Project technical
+site_url: https://sitename.example
+nav:
+  - Home: index.md
+  - About: about.md
+theme: mkdocs
+#   name: mkdocs
+#   palette:
+#     scheme: slate
+    # toggle:
+    #   icon: material/weather-sunny
+    #   name: Dark mode
+    # primary: green
+    # accent: deep purple
+
+
+
+
