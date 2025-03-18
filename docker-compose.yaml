@@ -1,0 +1,50 @@
+# services:
+#   mongodb:
+#     hostname: mongodb
+#     image: mongodb/mongodb-atlas-local
+#     environment:
+#       - MONGODB_INITDB_ROOT_USERNAME=user
+#       - MONGODB_INITDB_ROOT_PASSWORD=pass
+#     ports:
+#       - 27019:27017
+#     volumes:
+#       - data:/data/db
+#       - config:/data/configdb
+# volumes:
+#   data:
+#   config:
+
+version: '3.8'
+services:
+  mongodb:
+    hostname: mongodb
+    image: mongodb/mongodb-atlas-local
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=user
+      - MONGODB_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - 27019:27017
+    volumes:
+      - data:/data/db
+      - config:/data/configdb
+    networks:
+      - mongo_network 
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=user
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
+      - ME_CONFIG_MONGODB_URL=mongodb://user:pass@mongodb:27017/?directConnection=true
+    networks:
+      - mongo_network 
+volumes:
+  data:
+  config:
+
+networks:
+  mongo_network:
+    driver: bridge
